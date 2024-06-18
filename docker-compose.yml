@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  prestashop:
+    image: prestashop/prestashop:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - /data/prestashop:/var/www/html
+    environment:
+      - DB_SERVER=mysql
+      - DB_NAME=prestashop_db
+      - DB_USER=prestashop_user
+      - DB_PASSWORD=prestashop
+    networks:
+      - prestashop_net
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - /data/prestashop_DB:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=prestashop_db
+      - MYSQL_USER=prestashop_user
+      - MYSQL_PASSWORD=prestashop
+    networks:
+      - prestashop_net
+
+networks:
+  prestashop_net:
+    driver: bridge
