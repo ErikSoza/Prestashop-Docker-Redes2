@@ -1,0 +1,5 @@
+# Archivos de configuración sensibles
+.bash_history
+.docker/
+.ssh/
+PAT.txt
